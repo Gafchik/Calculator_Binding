@@ -24,12 +24,12 @@ namespace Calculator_Binding.Calculator_VewModel
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         internal void Calculate(string input_str)
         {
-            model.input_string = input_str;
-            bool IS_act = false;
-            char act = '+';
-            string first_number = string.Empty;
-            string second_number = string.Empty;
-            for (int i = 0; i < model.input_string.Length; i++)
+            model.input_string = input_str; // присваиваем входящюю строке с вью в модель
+            bool IS_act = false; // флаг был ли обнаружен оператор
+            char act = '+'; // переменная для хранения оператора примера
+            string first_number = string.Empty; // первое число 
+            string second_number = string.Empty; // второе число
+            for (int i = 0; i < model.input_string.Length; i++) // цикил бежит по строке и сохраняет цифры и оператор
             {
                 switch (model.input_string[i])
                 {
@@ -56,27 +56,27 @@ namespace Calculator_Binding.Calculator_VewModel
                             second_number += model.input_string[i];
 
                         break;
-                }
-                switch (act)
-                {
-                    case '+':
-                        model.rezult = double.Parse(first_number) + double.Parse(second_number);
-                        break;
-                    case '-':
-                        model.rezult = double.Parse(first_number) - double.Parse(second_number);
-                        break;
-                    case '*':
-                        model.rezult = double.Parse(first_number) * double.Parse(second_number);
-                        break;
-                    case '/':
-                        if (double.Parse(second_number) != 0)
-                            model.rezult = double.Parse(first_number) / double.Parse(second_number);
-                        else
-                            throw new DivideByZeroException();
-                        break;
-                    default:                    
-                        break;
-                }
+                }               
+            }
+            switch (act) // свич для выбора мат действия и присваивание результатов
+            {
+                case '+':
+                    model.rezult = double.Parse(first_number) + double.Parse(second_number);
+                    break;
+                case '-':
+                    model.rezult = double.Parse(first_number) - double.Parse(second_number);
+                    break;
+                case '*':
+                    model.rezult = double.Parse(first_number) * double.Parse(second_number);
+                    break;
+                case '/':
+                    if (double.Parse(second_number) != 0)
+                        model.rezult = double.Parse(first_number) / double.Parse(second_number);
+                    else
+                        throw new DivideByZeroException();
+                    break;
+                default:
+                    break;
             }
         }
     }
