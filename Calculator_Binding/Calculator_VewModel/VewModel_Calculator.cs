@@ -22,5 +22,62 @@ namespace Calculator_Binding.Calculator_VewModel
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
             => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        internal void Calculate(string input_str)
+        {
+            model.input_string = input_str;
+            bool IS_act = false;
+            char act = '+';
+            string first_number = string.Empty;
+            string second_number = string.Empty;
+            for (int i = 0; i < model.input_string.Length; i++)
+            {
+                switch (model.input_string[i])
+                {
+                    case '+':
+                        IS_act = true;
+                        act = model.input_string[i];
+                        break;
+                    case '-':
+                        IS_act = true;
+                        act = model.input_string[i];
+                        break;
+                    case '*':
+                        IS_act = true;
+                        act = model.input_string[i];
+                        break;
+                    case '/':
+                        IS_act = true;
+                        act = model.input_string[i];
+                        break;
+                    default:
+                        if (!IS_act)
+                            first_number += model.input_string[i];
+                        else
+                            second_number += model.input_string[i];
+
+                        break;
+                }
+                switch (act)
+                {
+                    case '+':
+                        model.rezult = double.Parse(first_number) + double.Parse(second_number);
+                        break;
+                    case '-':
+                        model.rezult = double.Parse(first_number) - double.Parse(second_number);
+                        break;
+                    case '*':
+                        model.rezult = double.Parse(first_number) * double.Parse(second_number);
+                        break;
+                    case '/':
+                        if (double.Parse(second_number) != 0)
+                            model.rezult = double.Parse(first_number) / double.Parse(second_number);
+                        else
+                            throw new DivideByZeroException();
+                        break;
+                    default:                    
+                        break;
+                }
+            }
+        }
     }
 }
