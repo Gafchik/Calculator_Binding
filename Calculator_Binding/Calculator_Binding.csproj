@@ -64,7 +64,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Calculator_Model\Model_Calculator.cs" />
-    <Compile Include="Calculator_VewModel\VewModel_Calculator.cs" />
+    <Compile Include="Calculator_VewModel\ViewModel_Calculator.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
